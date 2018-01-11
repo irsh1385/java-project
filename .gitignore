@@ -2,4 +2,3 @@ bin/*
 dist/*
 reports/*
 docs/*
-build.xml

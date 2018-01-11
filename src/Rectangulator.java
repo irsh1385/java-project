@@ -10,4 +10,3 @@ public class Rectangulator {
     System.out.println(output);
   }
 }
-//Just a comment

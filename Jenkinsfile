@@ -19,6 +19,11 @@ pipeline {
       steps {
         sh 'ant -f build.xml -v'
       }
+      post {
+        success {
+          archiveArtifacts artifacts: 'dist/*.jar', fingerprint: true
+        }
+      }
     }
     stage ('deploy') {
       agent {
@@ -33,15 +38,11 @@ pipeline {
         label 'CentOS'
       }
       steps {
-        sh "wget http://http://172.28.128.20:8081/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "wget http://172.28.128.20:8081/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
       }
     }
   }
 
-  post {
-    always {
-      archiveArtifacts artifacts: 'dist/*.jar', fingerprint: true
-    }
-  }
+
 }

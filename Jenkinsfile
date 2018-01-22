@@ -49,7 +49,7 @@ pipeline {
     }
     stage ("Test on Debian") {
       agent {
-        docker 'openjdk:8u151-jre-alpine --build-arg http_proxy=http://genproxy.amdocs.com:8080'
+        docker 'openjdk:8u151-jre-alpine'
       }
       steps {
         sh "wget http://172.28.128.20:8081/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
@@ -80,6 +80,7 @@ pipeline {
         echo "Checking Out Developement Branch"
         sh 'git checkout developement'
         echo 'Checking Out Master Branch'
+        sh 'git pull origin'
         sh 'git checkout master'
         echi 'Merging Developement into Master Branch'
         sh 'git merge developement'

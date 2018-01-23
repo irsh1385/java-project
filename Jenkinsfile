@@ -85,6 +85,7 @@ pipeline {
         echo 'Merging Developement into Master Branch'
         sh 'git merge developement'
         echo 'Pushing to Orign Master'
+        sh 'git remote set-url origin https://irsh1385@github.com/irsh1385/java-project.git'
         sh 'git push origin master'
         echo 'Tagging the Release'
         sh "git tag rectangle-${env.MAJOR_VERSION}.${env.BUILD_NUMBER}"
